@@ -1,3 +1,4 @@
+//https://en.wikipedia.org/wiki/Letter_frequency
 function Text(text)
 {
     this.text=text.normalize().toLowerCase();
@@ -88,11 +89,25 @@ Text.prototype.whichLanguage=function() {
         'l':5.456
     };
 
+    var GERMAN= {
+        'e': 16.396,
+        'n': 9.776,
+        's': 7.270,
+        'r': 7.003,
+        'i': 6.550,
+        'a': 6.516,
+        't': 6.154,
+        'd': 5.076,
+        'h': 4.577,
+        'u': 4.166
+    };
+
     var LANGUAGES_LETTER_FREQUENCY={
-        Spanish:SPANISH,
-        Portuguese:PORTUGUESE,
+        Spanish: SPANISH,
+        Portuguese: PORTUGUESE,
         English: ENGLISH,
-        French: FRENCH
+        French: FRENCH,
+        German: GERMAN
     };
 
     var minDeviation=Number.MAX_VALUE;
