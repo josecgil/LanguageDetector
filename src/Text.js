@@ -37,7 +37,7 @@ Text.prototype.getDeviationFromLanguage=function (language) {
     return sumDeviation/10.0;
 };
 
-Text.prototype.wichLanguage=function() {
+Text.prototype.whichLanguage=function() {
     var SPANISH= {
         'e':12.181,
         'a':11.525,
@@ -112,7 +112,7 @@ function analyzeLanguage() {
     var textAreaValue=document.getElementsByTagName("textarea")[0].value;
     var text=new Text(textAreaValue);
     var p=document.getElementsByTagName("p")[0];
-    p.innerHTML=text.wichLanguage();
+    p.innerHTML=text.whichLanguage();
 }
 
 
