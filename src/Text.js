@@ -5,7 +5,7 @@ function Text(text)
     this.letterFrequencyDictionary=this.getLetterFrequencyDictionary();
 }
 
-Text.prototype.isLetter=function (char) {
+Text.prototype.isValidLetter=function (char) {
     return char.match(/[a-z]/i);
 };
 
@@ -13,7 +13,7 @@ Text.prototype.getLetterFrequencyDictionary=function () {
     var letterFrequencyDictionary={};
     for(var i=0; i<this.text.length; i++) {
         var char=this.text[i];
-        if (!this.isLetter(char)) continue;
+        if (!this.isValidLetter(char)) continue;
 
         if (letterFrequencyDictionary[char]==undefined) {
             letterFrequencyDictionary[char]=0;
@@ -26,16 +26,17 @@ Text.prototype.getLetterFrequencyDictionary=function () {
 
 Text.prototype.getDeviationFromLanguage=function (language) {
     var sumDeviation=0;
+    var countLetters=0;
     for(var letter in language) {
         var normalFrequency=language[letter];
         var countFrequency=this.letterFrequencyDictionary[letter];
         if (countFrequency==undefined) countFrequency=0;
-
         var sampleFrequency=(countFrequency/this.text.length)*100;
         var distance=Math.abs(normalFrequency-sampleFrequency);
         sumDeviation=sumDeviation+distance;
+        countLetters++;
     }
-    return sumDeviation/10.0;
+    return sumDeviation/countLetters;
 };
 
 Text.prototype.whichLanguage=function() {
@@ -115,6 +116,7 @@ Text.prototype.whichLanguage=function() {
     for (var languageName in LANGUAGES_LETTER_FREQUENCY){
         var languageLetterFrequency = LANGUAGES_LETTER_FREQUENCY[languageName];
         var deviation=this.getDeviationFromLanguage(languageLetterFrequency);
+        console.log(languageName+":"+deviation);
         if (deviation<minDeviation){
             minDeviation=deviation;
             mostProbableLanguage=languageName;
